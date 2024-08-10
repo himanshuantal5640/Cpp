@@ -42,7 +42,9 @@ int main(){
     vector<vector<int>> matrix(n,vector<int>(m));
     for(int i = 0;i<n;i++){
         for(int j=0;j<m;j++){
-            cin>>matrix[i][j];
+            cout<<"Enter a num: ";
+            cin>>matrix[i][j];     
+                 
         }
     }
     vector<int> spiral = spiralmatrix(matrix);
