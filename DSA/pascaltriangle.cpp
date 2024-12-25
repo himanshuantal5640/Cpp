@@ -77,4 +77,80 @@ using namespace std;
 // }
 
 //  Variation 3:->  Given the number of rows n. Print the first n rows of Pascal’s triangle.
+    // brute approach
 
+// int nCr(int row, int col){
+//     long long res = 1;
+//     for(int i=0;i<col;col++){
+//         res = res*(row - i);
+//         res = res/(i+1);
+//     }
+//     return (int)(res);
+// }
+// vector<vector<int>> PascalTriangle(int n){
+//     vector<vector<int>> ans;
+//     for(int row = 1;row<=n;row++){//--> rows
+//         vector<int> templist;
+//         for(int col = 1;col<=row;col++){  //--> columns
+//             templist.push_back(nCr(row-1,col-1));
+//         }
+//         ans.push_back(templist);
+//     }
+//     return ans;
+//     // Time Complexity: O(n*n*r) ~ O(n3)
+//     // Space Complexity:  O(1)
+// }
+// int main(){
+//     int n;
+//     cout<<"Enter row no: ";
+//     cin>>n;
+//     vector<vector<int>> ans  = PascalTriangle(n);
+//     for(auto it:ans){
+//         for(auto ele:it){
+//             cout<<ele<<" ";
+//         }
+//         cout<<"\n";
+//     }
+//     return 0;
+// }
+
+//variation 3 optimal approach
+
+
+
+vector<int> generateRow(int row) {
+    long long ans = 1;
+    vector<int> ansRow;
+    ansRow.push_back(1); //inserting the 1st element
+
+    //calculate the rest of the elements:
+    for (int col = 1; col < row; col++) {
+        ans = ans * (row - col);
+        ans = ans / col;
+        ansRow.push_back(ans);
+    }
+    return ansRow;
+}
+
+vector<vector<int>> pascalTriangle(int n) {
+    vector<vector<int>> ans;
+
+    //store the entire pascal's triangle:
+    for (int row = 1; row <= n; row++) {
+        ans.push_back(generateRow(row));
+    }
+    return ans;
+}
+
+int main()
+{
+    int n = 5;
+    vector<vector<int>> ans = pascalTriangle(n);
+    for (auto it : ans) {
+        for (auto ele : it) {
+            cout << ele << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
